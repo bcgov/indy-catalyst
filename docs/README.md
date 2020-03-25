@@ -1,7 +1,7 @@
 
-# Hyperledger Indy Catalyst <!-- omit in toc -->
+# Hyperledger Aries VCR <!-- omit in toc -->
 
-![logo](/docs/assets/indy-catalyst-logo-bw.png)
+![logo](/docs/assets/aries-vcr-logo-bw.png)
 
 # Table of Contents <!-- omit in toc -->
 
@@ -11,7 +11,7 @@
 - [Prerequisites](##prerequisites)
 - [Running a VON - Verified Organizations Network](##running-a-von---verified-organizations-network)
   - [Running on Docker Locally](###running-the-network-on-docker-locally)
-- [Indy Catalyst](##indy-catalyst)
+- [Aries VCR](##aries-vcr)
   - [Building the Images](###building-the-images)
   - [Starting the Project](###starting-the-project)
   - [Stopping the Project](###stopping-the-project)
@@ -26,24 +26,24 @@
 
 ## Introduction
 
-This guide is intended for use by teams and entities who are planning to or currently working with the Indy-Catalyst software components.
+This guide is intended for use by teams and entities who are planning to or currently working with the aries-vcr software components.
 
 If you are unfamiliar with the underpinning technologies and concepts that are utilized in this project please review the getting started documentation in the vonx.io homepage: [Get Started with VON - Verifiable Organizations Network](https:\\vonx.io\getting_started\get-started\#technical-components-of-a-von-ecosystem)
 
 ## Before you Start
 
-Running this project in development requires a running VON - Verified Organizations Network, the Indy-Catalyst project and an Indy Catalyst Issuer Controller.
+Running this project in development requires a running VON - Verified Organizations Network, the aries-vcr project and an Aries VCR Issuer Controller.
 
-Indy Catalyst is a cloud based project that is developed as a cloud-native application. All components are developed in Docker first. <em> As such we <b>strongly recommend</b> that using Docker for all development local or otherwise</em>.
+Aries VCR is a cloud based project that is developed as a cloud-native application. All components are developed in Docker first. <em> As such we <b>strongly recommend</b> that using Docker for all development local or otherwise</em>.
 
-<span style="color:red;">The Indy-Catalyst contributors do not test or develop any of the technical components on bare metal.</span>
+<span style="color:red;">The aries-vcr contributors do not test or develop any of the technical components on bare metal.</span>
 
 ## Repositories
 
-Running all components of an Indy Catalyst network in development requires the following repositories:
+Running all components of an Aries VCR network in development requires the following repositories:
 
 - [VON - Verified Organizations Network](https://github.com/bcgov/von-network)
-- [Indy Catalyst](https://github.com/bcgov/indy-catalyst)
+- [Aries VCR](https://github.com/hyperledger/aries-vcr)
 - [Indy Catalyst Issuer Controller](https://github.com/bcgov/indy-catalyst-issuer-controller)
 
 The Issuer Controller may not be necessary for your project implementation if there is no need for issuing credentials. It will still be required for development (to issue credentials) if you do not have a separate agent that you are using for issuing.
@@ -89,16 +89,16 @@ Stopping the Network
 To stop the scrolling logs and get to a command prompt, hit Ctrl-C. To stop and remove the network persistence (the Ledger), run: `./manage down`
 If necessary, you can use `./manage stop` instead of down to stop the containers but retain the persistence.
 
-## Indy Catalyst
+## Aries VCR
 
-Fork and clone the Indy Catalyst project as per the initial instructions at the outset.
+Fork and clone the Aries VCR project as per the initial instructions at the outset.
 
-Fork the project, navigate to the folder where you keep your projects and repositories and run `git clone https://github.com/<username>/indy-catalyst`
+Fork the project, navigate to the folder where you keep your projects and repositories and run `git clone https://github.com/<username>/aries-vcr`
 
 There are a few different technical components to the project which are described in more detail here [link]
 
-Finally, change directory to the new created starter-kit located in the indy-catalyst project folder:
-`cd indy-catalyst/starter-kits/credential-registry/docker`
+Finally, change directory to the new created starter-kit located in the aries-vcr project folder:
+`cd aries-vcr/starter-kits/credential-registry/docker`
 
 ### Building the Images
 
@@ -108,7 +108,7 @@ To build the images run `./manage build`
 
 ### Starting the Project
 
-The Indy Catalyst starter kit requires a unique seed for development. This is a 32 character value that uniquely identifies your wallet/ledger seed to the VON ledger running locally or on another network.
+The Aries VCR starter kit requires a unique seed for development. This is a 32 character value that uniquely identifies your wallet/ledger seed to the VON ledger running locally or on another network.
 
 You will need to choose a unique seed value for development. Use a value that is not used by another agent within the environment. It must be 32 characters long exactly. If you're using an externally hosted VON ledger you will need to be careful to select a unique seed in this step.
 
@@ -152,7 +152,7 @@ To remove the volumes and network elements run:
 
 ### Live Web Development
 
-The Indy Catalyst Org Book can also be brought up in a state where local modifications to the vcr-web component are detected automatically, resulting in recompilation of the Javascript and CSS resources and a page reload when viewed in a web browser. To run Indy Catalyst Org Book using this method execute:
+The Aries VCR Org Book can also be brought up in a state where local modifications to the vcr-web component are detected automatically, resulting in recompilation of the Javascript and CSS resources and a page reload when viewed in a web browser. To run Aries VCR Org Book using this method execute:
 
 `./manage web-dev seed="my_seed_000000000000000000000000"`
 

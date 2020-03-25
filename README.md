@@ -1,6 +1,6 @@
-# Hyperledger Indy Catalyst <!-- omit in toc -->
+# Hyperledger Aries VCR <!-- omit in toc -->
 
-![logo](/docs/assets/indy-catalyst-logo-bw.png)
+![logo](/docs/assets/aries-vcr-logo-bw.png)
 
 # Table of Contents <!-- omit in toc -->
 
@@ -21,9 +21,9 @@
 - [Hyperledger Indy](#hyperledger-indy)
   - [Overview](#overview)
   - [Technical information for Hyperledger Indy](#technical-information-for-hyperledger-indy)
-- [Hyperledger Indy Catalyst](#hyperledger-indy-catalyst)
+- [Hyperledger Aries VCR](#hyperledger-aries-vcr)
   - [Motivation](#motivation)
-  - [Who is Indy Catalyst For](#who-is-indy-catalyst-for)
+  - [Who is Aries VCR For](#who-is-aries-vcr-for)
   - [Key Technical Elements](#key-technical-elements)
     - [Credential Registry](#credential-registry)
     - [Web Hooks](#web-hooks)
@@ -37,9 +37,9 @@
 
 # Introduction
 
-**Hyperledger Indy Catalyst** is a set of application level software components designed to accelerate the adoption of trustworthy entity to entity<sup id="a1">[1](#f1)</sup> communications based on Decentralized Identity / Self-Sovereign Identity technology and architecture. Indy Catalyst is builds upon globally available open standards and open source software. At present, Indy Catalyst builds upon [Hyperledger Indy](https://www.hyperledger.org/projects), common enterprise open source software, frameworks and patterns such as PostgreSQL, Python, Angular and RESTful APIs. Efforts will be taken to design the software to facilitate the incorporation of evolving open standards and technology. The impetus for Indy Catalyst came from the Verifiable Organizations Network (VON) project. More information about VON can be found at [vonx.io](https://vonx.io)
+**Hyperledger Aries VCR** is a set of application level software components designed to accelerate the adoption of trustworthy entity to entity<sup id="a1">[1](#f1)</sup> communications based on Decentralized Identity / Self-Sovereign Identity technology and architecture. Aries VCR is builds upon globally available open standards and open source software. At present, Aries VCR builds upon [Hyperledger Indy](https://www.hyperledger.org/projects), common enterprise open source software, frameworks and patterns such as PostgreSQL, Python, Angular and RESTful APIs. Efforts will be taken to design the software to facilitate the incorporation of evolving open standards and technology. The impetus for Aries VCR came from the Verifiable Organizations Network (VON) project. More information about VON can be found at [vonx.io](https://vonx.io)
 
-In order to understand the goals and context of Hyperledger Indy Catalyst, it is advisable to become familiar with the model of decentralized identity or self-sovereign identity which enables trustworthy entity to entity communications. The open standards and technologies enabling this new this model are presented below and annotated with references.
+In order to understand the goals and context of Hyperledger Aries VCR, it is advisable to become familiar with the model of decentralized identity or self-sovereign identity which enables trustworthy entity to entity communications. The open standards and technologies enabling this new this model are presented below and annotated with references.
 
 # Decentralized Identity / Self-Sovereign Identity
 
@@ -53,7 +53,7 @@ In contrast, the design of a decentralized or "self-sovereign" identity system i
 
 Using this new approach to identity systems design means a person would be in full control of data issued to them by third parties. People would be in control of disclosing of their personally identifiable data as issued by themselves (e.g. personal preferences, messages, etc) or issued to them by third parties. These third parties may include authoritative issuers such as governments (e.g. identity documents, licences) or they could be issuers such as a local sports club (e.g. membership). Critically, "self-sovereign" is not intended to suggest a "digital self-declaration" of ones identity in opposition to or as a substitute for authoritative and officially issued identity attributes from a government. Rather, that one is both "in control" of the relationship (the decentralized identifier) and the data (verifiable credential) issued to them. Therefore, once one is holding this officially issued data, one can choose when and what one would like to disclose to third parties. The details of how this can be technically achieved are described briefly in the following sections along with appropriate references for further study.
 
-It is important to note that while these emerging standards and technologies are being designed to tackle the very difficult challenges of secure and privacy respecting digital identity for people, they are not limited to the narrow context of personal identity. This new model can be applied to a broader set of use cases beyond those involving personally identifiable information. The model offers a generalized capability enabling highly secure entity to entity communications and it is this generalized capability that has led to the creation of Hyperledger Indy Catalyst. Indy Catalyst components enable enterprises to issue, hold and verify data about entities.
+It is important to note that while these emerging standards and technologies are being designed to tackle the very difficult challenges of secure and privacy respecting digital identity for people, they are not limited to the narrow context of personal identity. This new model can be applied to a broader set of use cases beyond those involving personally identifiable information. The model offers a generalized capability enabling highly secure entity to entity communications and it is this generalized capability that has led to the creation of Hyperledger Aries VCR. Aries VCR components enable enterprises to issue, hold and verify data about entities.
 
 ## Open Standards
 
@@ -143,22 +143,22 @@ The technical means by which this is accomplished include a number of new open e
 
 - [Technical information for Hyperledger Indy](https://indy.readthedocs.io/en/latest/)
 
-# Hyperledger Indy Catalyst
+# Hyperledger Aries VCR
 
 {to be completed}
 
 ## Motivation
 
-Indy Catalyst components are designed for several enterprise scenarios:
+Aries VCR components are designed for several enterprise scenarios:
 
 1. join an existing Hyperledger Indy based network as a entity that can engage in entity to entity communication
 2. establish a credential registry
 
 Networks require a strategy to get them started. This is due to the challenge of creating network effects. There are several excellent resources describing what network effect are, why they are important, and techniques to go about creating them. Several excellent summaries describing techniques for creating network effects can be found in this [Andreessen Horowitz article](https://a16z.com/2016/03/07/all-about-network-effects/)and in this [NfX article](https://www.nfx.com/post/network-effects-manual). Sometimes this problem is referred to as the ["Chicken and Egg Bootstraping problem"](https://blog.creandum.com/the-chicken-and-the-egg-bootstrapping-a-network-b1165b3a5c47).
 
-## Who is Indy Catalyst For
+## Who is Aries VCR For
 
-Indy Catalyst components:
+Aries VCR components:
 
 - use standard enterprise and Internet technologies;
 - implement common integration patterns to minimize effort to adopt; and,
@@ -174,7 +174,7 @@ Credential Registry provides a set of RESTful web services you can use to query 
 
 ### Web Hooks
 
-Indy Catalyst provides a web hook facility for interested parties to subscribe to notifications for credential updates.
+Aries VCR provides a web hook facility for interested parties to subscribe to notifications for credential updates.
 
 There are 3 subscription types supported:
 

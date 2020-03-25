@@ -10,21 +10,21 @@ Interested parties must first register, which creates an ID and password they us
 
 They must also provide a REST endpoint for the notifications - they can provide an endpoint with their scubscription and/or an endpoint with each separate subscription.
 
-The REST endpoints to manage subscriptions are listed in the Indy Catalyst Swagger page, if you are running locally this is at `htp://localhost:8080/api/`
+The REST endpoints to manage subscriptions are listed in the Aries VCR Swagger page, if you are running locally this is at `htp://localhost:8080/api/`
 
 ## Setting up a Test Listener
 
-A test "echo" endpoint is available in this project at https://github.com/bcgov/indy-catalyst/starter-kits/credential-registry/server/echo-service - you can run this service in Play With Docker or play With VON and then you can use this service as the endpoint for the web hooks.  Alternately this service will start up by default with you start Indy Catalyst using the `./manage build` and `./manage start` docker scripts.
+A test "echo" endpoint is available in this project at https://github.com/hyperledger/aries-vcr/starter-kits/credential-registry/server/echo-service - you can run this service in Play With Docker or play With VON and then you can use this service as the endpoint for the web hooks.  Alternately this service will start up by default with you start Aries VCR using the `./manage build` and `./manage start` docker scripts.
 
 Create a session on PWD or PWV and run the following commands:
 
 ```
-git clone https://github.com/bcgov/indy-catalyst.git
-cd indy-catalyst/starter-kits/credential-registry/server/echo-service
+git clone https://github.com/hyperledger/aries-vcr.git
+cd aries-vcr/starter-kits/credential-registry/server/echo-service
 ./run_docker.sh
 ```
 
-This will expose the echo service on a public endpoint, that will be visible to Indy Catalyst callbacks.  If you click on the port `8000` link at the top of the page, it will display the public service name - add `/api/echo` to get the name of the web service, for example:
+This will expose the echo service on a public endpoint, that will be visible to Aries VCR callbacks.  If you click on the port `8000` link at the top of the page, it will display the public service name - add `/api/echo` to get the name of the web service, for example:
 
 ```
 http://ip172-18-0-6-bnomr08t969000ca90fg-8000.direct.labs.play-with-docker.com/api/echo
@@ -45,7 +45,7 @@ Note that this service exposes two other endpoints that are useful for testing w
 
 ## Registration
 
-You must register to setup an identity (ID and password) in order to create and manage subscriptions.  Your subscritions will be protected with your ID and password.  In your own Indy Catalyst deployment you can modify the security scheme to integrate with an external security provider, such as KeyCloak or &etc ...
+You must register to setup an identity (ID and password) in order to create and manage subscriptions.  Your subscritions will be protected with your ID and password.  In your own Aries VCR deployment you can modify the security scheme to integrate with an external security provider, such as KeyCloak or &etc ...
 
 The registration endpoint is `/hooks/register` and you must provide the following data:
 
@@ -65,7 +65,7 @@ The registration endpoint is `/hooks/register` and you must provide the followin
 - email - the email address responsible for the subscription
 - org_name - the name of the subscribing organization
 - target_url - the target url for web hooks (note this is optional and can be provided per-subscription)
-- hook_token - the token that Indy Catalyst will include with all web hook notifications (you provide, we send)
+- hook_token - the token that Aries VCR will include with all web hook notifications (you provide, we send)
 - username - the identity of the subscription owner (must be provided for all subscription maintenance)
 - password - the password for the subscription owner identity (must be provided for all subscription maintenance)
 
@@ -129,7 +129,7 @@ The endpoint will return:
 }
 ```
 
-Note that Indy Catalyst will do a test call to the target_url, to verify that the endpoint is valid.  (It does this for a subscription event, but not a registration event.)
+Note that Aries VCR will do a test call to the target_url, to verify that the endpoint is valid.  (It does this for a subscription event, but not a registration event.)
 
 You can view your subscriptions at `/hooks/registration/{username}/subscriptions`, or `/hooks/registration/{username}/subscriptions/{id}` (where `id` is the `sub_id` returned from the subscription service call).
 
@@ -146,7 +146,7 @@ You can re-activate the subscription by sending a `PUT` request for the subscrip
 
 ## Receiving Web Hooks
 
-For any matching event, Indy Catalyst will send a POST request to the target URL with the following payload:
+For any matching event, Aries VCR will send a POST request to the target URL with the following payload:
 
 ```
 {

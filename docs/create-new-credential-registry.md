@@ -1,5 +1,5 @@
 
-# Running the Indy Catalyst Credential Registry
+# Running the Aries VCR Credential Registry
 
 TODO overview
 
@@ -15,12 +15,12 @@ cd von-network
 ./manage start
 ```
 
-Once this is running, simply clone, build and run Indy Catalyst as follows:
+Once this is running, simply clone, build and run Aries VCR as follows:
 
 ```
-https://github.com/bcgov/indy-catalyst
-cd indy-catalyst/starter-kits/docker
-THEME_PATH=/path/to/indy-catalyst/client/themes/ THEME=bcgov ./manage build
+https://github.com/hyperledger/aries-vcr
+cd aries-vcr/starter-kits/docker
+THEME_PATH=/path/to/aries-vcr/client/themes/ THEME=bcgov ./manage build
 THEME=bcgov ./manage start seed=my_seed_000000000000000000000123
 ```
 
@@ -43,21 +43,21 @@ There is also a more robust Issuer available here:  https://github.com/bcgov/von
 
 You will need your own fork if you intend to:
 
-- Customize the Indy Catalyst code
+- Customize the Aries VCR code
 - Update the code (fix bugs, add features) that you intend to submit back to bcgov
 
-Simply fork the https://github.com/bcgov/indy-catalyst repository on github to create your own fork.
+Simply fork the https://github.com/hyperledger/aries-vcr repository on github to create your own fork.
 
 When you create a local clone, add the bcgov repo as an "upstream" as follows:
 
 ```
-https://github.com/<you>/indy-catalyst
-cd indy-catalyst
-git remote add upstream https://github.com/bcgov/indy-catalyst
+https://github.com/<you>/aries-vcr
+cd aries-vcr
+git remote add upstream https://github.com/hyperledger/aries-vcr
 git remote -v
 ```
 
-Depending on how much you customize the Indy Catalyst code, you can keep your own fork up-do-date as follows:
+Depending on how much you customize the Aries VCR code, you can keep your own fork up-do-date as follows:
 
 ```
 git fetch upstream
@@ -90,7 +90,7 @@ Just name your file "app/app/custom_settings_<theme>.py"
 Build the Credential Registry as follows (use your theme name):
 
 ```
-THEME_PATH=/path/to/indy-catalyst/client/themes/ THEME=bcgov ./manage build
+THEME_PATH=/path/to/aries-vcr/client/themes/ THEME=bcgov ./manage build
 THEME=bcgov ./manage start seed=my_seed_000000000000000000000123
 ```
 

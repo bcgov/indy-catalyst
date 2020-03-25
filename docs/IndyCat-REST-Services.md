@@ -1,6 +1,6 @@
-# Indy Catalyst Credential Registry REST Services
+# Aries VCR Credential Registry REST Services
 
-The Credential Registry provides a [Swagger](https://swagger.io/) ([OpenAPI](https://www.openapis.org)) page that provides an interactive way to test out its available APIs.  The Credential Registry's Swagger page is available in a local Indy Catalyst install at [http://localhost:8080/api/](http://localhost:8080/api/), or (for example) in a stable test deployment at [https://test.orgbook.gov.bc.ca/api/](https://test.orgbook.gov.bc.ca/api/).
+The Credential Registry provides a [Swagger](https://swagger.io/) ([OpenAPI](https://www.openapis.org)) page that provides an interactive way to test out its available APIs.  The Credential Registry's Swagger page is available in a local Aries VCR install at [http://localhost:8080/api/](http://localhost:8080/api/), or (for example) in a stable test deployment at [https://test.orgbook.gov.bc.ca/api/](https://test.orgbook.gov.bc.ca/api/).
 
 ## Organization Name Search
 
