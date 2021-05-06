@@ -13,6 +13,9 @@ fi
 
 SCRIPT_HOME="$(cd "$(dirname "$0")" && pwd)"
 
+export VCR_API_TIMEOUT="${VCR_API_TIMEOUT:-60}"
+export VCR_API_URL_CONFIG="${VCR_API_URL_CONFIG}"
+
 # =================================================================================================================
 # Usage:
 # -----------------------------------------------------------------------------------------------------------------
@@ -59,8 +62,13 @@ usage() {
             
             The API_URL used by vcr-web can also be redirected.
 
+            You can include a '--wait' parameter which will wait until the ledger is active
+            When using the '--logs' option, use ctrl-c to exit logging. Use "down" or "stop" to stop the run.
+
             Examples:
             $0 start
+            $0 start --logs
+            $0 start --logs --wait
             $0 start vcr-solr
             $0 start vcr-web
             $0 start vcr-web API_URL=http://docker.for.win.localhost:56325/api/v1
@@ -402,6 +410,12 @@ configureEnvironment() {
         # echo "Exporting ..."
         export "${arg}"
         ;;
+      --logs)
+        TAIL_LOGS=1
+        ;;
+      --wait)
+        WAIT_FOR_VCR_API=1
+        ;;
       *)
         # echo "Saving for later ..."
         # If not recognized, save it for later procesing ...
@@ -530,12 +544,82 @@ configureEnvironment() {
   fi
 }
 
+function logs() {
+  (
+    local OPTIND
+    local unset _force
+    local unset no_tail
+    while getopts ":f-:" FLAG; do
+      case $FLAG in
+        f ) local _force=1 ;;
+        - ) 
+            case ${OPTARG} in
+                "no-tail"*) no_tail=1
+              ;;
+            esac
+      esac
+    done
+    shift $((OPTIND-1))
+
+    log_args=()
+    (( no_tail != 1 )) && log_args+=( '-f' )
+    if [ ! -z "${TAIL_LOGS}" ] || [ ! -z "${_force}" ]; then
+      docker-compose \
+        --log-level ERROR logs \
+         "${log_args[@]}" "$@"
+    fi
+  )
+}
+
+pingVcrApi(){
+  vcr_api_url=${1}
+
+  # ping ledger web browser for genesis txns
+  local rtnCd=$(curl -s --write-out '%{http_code}' --output /dev/null ${vcr_api_url}/api/v2/status)
+  if (( ${rtnCd} == 200 )); then
+    return 0
+  else
+    return 1
+  fi
+}
+
+function wait_for_vcr_api() {
+  (
+    # if flag is set, wait for ledger to activate before continuing
+    local rtnCd=0
+    if [ ! -z "${WAIT_FOR_VCR_API}" ]; then
+      # Wait for ledger server to start ...
+      local startTime=${SECONDS}
+      # use global LEDGER_URL
+      local VCR_API_URL="${VCR_API_URL_CONFIG:-http://localhost:8081}"
+      printf "waiting for api to start"
+      while ! pingVcrApi "$VCR_API_URL"; do
+        printf "."
+        local duration=$(($SECONDS - $startTime))
+        if (( ${duration} >= ${VCR_API_TIMEOUT} )); then
+          echoRed "\nThe Indy Ledger failed to start within ${duration} seconds.\n"
+          rtnCd=1
+          break
+        fi
+        sleep 1
+      done
+    fi
+    return ${rtnCd}
+  )
+}
+
 getInputParams() {
   ARGS=""
 
   for arg in $@; do
     case "$arg" in
     *=*)
+      # Skip it
+      ;;
+    --logs)
+      # Skip it
+      ;;
+    --wait)
       # Skip it
       ;;
     *)
@@ -554,6 +638,12 @@ getStartupParams() {
   for arg in $@; do
     case "$arg" in
     *=*)
+      # Skip it
+      ;;
+    --logs)
+      # Skip it
+      ;;
+    --wait)
       # Skip it
       ;;
     -*)
@@ -675,7 +765,9 @@ case "${COMMAND}" in
     _startupParams=$(getStartupParams --force-recreate $@)
     configureEnvironment "$@"
     docker-compose ${composeOptions} up --scale vcr-worker=2 -d ${_startupParams}
-    docker-compose logs -f
+    wait_for_vcr_api
+    logs
+    echo 'Want to see the scrolling container logs? Run "./manage logs"'
     ;;
   scale|upscale)
     _startupParams=$(getStartupParams --force-recreate $@)
@@ -685,7 +777,8 @@ case "${COMMAND}" in
     echo "Press any key to continue or <CRTL-C> to abort"
     read anykey
     docker-compose ${composeOptions} up --scale vcr-worker=2 --scale vcr-api=6 --scale vcr-agent=5 -d ${_startupParams}
-    docker-compose logs -f
+    logs
+    echo 'Want to see the scrolling container logs? Run "./manage logs"'
     ;;
   restart)
     _startupParams=$(getStartupParams $@)
@@ -695,7 +788,7 @@ case "${COMMAND}" in
     ;;
   logs)
     configureEnvironment "$@"
-    docker-compose logs -f
+    logs -f "$@"
     ;;
   web-dev)
     configureEnvironment "$@"
