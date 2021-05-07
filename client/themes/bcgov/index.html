@@ -1,5 +1,6 @@
 <!doctype html>
 <html class="fill-height-md">
+
 <head>
   <meta charset="utf-8">
   <title>OrgBook BC</title>
@@ -12,16 +13,44 @@
     /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
     _paq.push(['trackPageView']);
     _paq.push(['enableLinkTracking']);
-    (function() {
-      var u="//matomo.vonx.io/";
-      _paq.push(['setTrackerUrl', u+'matomo.php']);
+    (function () {
+      var u = "//matomo.vonx.io/";
+      _paq.push(['setTrackerUrl', u + 'matomo.php']);
       _paq.push(['setSiteId', '1']);
-      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+      g.type = 'text/javascript'; g.async = true; g.defer = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
     })();
   </script>
   <!-- End Matomo Code -->
 
+  <script type="text/javascript">
+    // <!-- Snowplow starts plowing - Standalone vE.2.14.0 -->
+    ; (function (p, l, o, w, i, n, g) {
+      if (!p[i]) {
+        p.GlobalSnowplowNamespace = p.GlobalSnowplowNamespace || [];
+        p.GlobalSnowplowNamespace.push(i); p[i] = function () {
+          (p[i].q = p[i].q || []).push(arguments)
+        }; p[i].q = p[i].q || []; n = l.createElement(o); g = l.getElementsByTagName(o)[0]; n.async = 1;
+        n.src = w; g.parentNode.insertBefore(n, g)
+      }
+    }(window, document, "script", "https://www2.gov.bc.ca/StaticWebResources/static/sp/sp-2-14-0.js", "snowplow"));
+    var collector = 'spm.apps.gov.bc.ca';
+    window.snowplow('newTracker', 'rt', collector, {
+      appId: "Snowplow_standalone",
+      cookieLifetime: 86400 * 548,
+      platform: 'web',
+      post: true,
+      forceSecureTracker: true,
+      contexts: {
+        webPage: true,
+        performanceTiming: true
+      }
+    });
+    window.snowplow('enableActivityTracking', 30, 30); // Ping every 30 seconds after 30 seconds
+    window.snowplow('enableLinkClickTracking');
+    window.snowplow('trackPageView');
+    // <!-- Snowplow stops plowing -->
+  </script>
 
   <link rel="apple-touch-icon" href="/assets/bootstrap/bcid-apple-touch-icon.png" sizes="180x180">
   <link rel="icon" href="/assets/bootstrap/bcid-favicon-32x32.png" sizes="32x32" type="image/png">
@@ -30,7 +59,8 @@
   <link rel="icon" href="/assets/bootstrap/bcid-favicon-32x32.png">
   <meta name="msapplication-config" content="/assets/bootstrap/browserconfig.xml">
   <meta name="theme-color" content="#036">
-  <meta name="description" content="OrgBook BC is a searchable public directory of open verifiable data about organizations legally registered in BC" />
+  <meta name="description"
+    content="OrgBook BC is a searchable public directory of open verifiable data about organizations legally registered in BC" />
 
   <meta property="og:site_name" content="OrgBook BC" />
   <meta property="og:title" content="British Columbia's Verifiable Organizations" />
@@ -39,15 +69,20 @@
   <meta property="og:image" content="${APPLICATION_URL}/assets/card-image.jpg" />
   <meta property="og:image:width" content="1000" />
   <meta property="og:image:height" content="667" />
-  <meta property="og:description" content="OrgBook BC is a searchable public directory of open verifiable data about organizations legally registered in BC" />
+  <meta property="og:description"
+    content="OrgBook BC is a searchable public directory of open verifiable data about organizations legally registered in BC" />
 </head>
+
 <body>
   <app-root class="fill-body">
     <div class="row mt-5">
       <div class="col-sm-12 page-load">
-        <div class="loading-indicator"><div class="alt-text">Loading ...</div></div>
+        <div class="loading-indicator">
+          <div class="alt-text">Loading ...</div>
+        </div>
       </div>
     </div>
   </app-root>
 </body>
+
 </html>
