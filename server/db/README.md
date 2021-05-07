@@ -18,7 +18,7 @@ The following SQL command will copy Business Nunbers from the `Attribute` table 
 
 ```SQL
 INSERT INTO public.name(create_timestamp, update_timestamp, text, credential_id, type)
-SELECT  att.create_timestamp, att.update_timestamp, att.value, att.credential_id, att.type
+SELECT  att.create_timestamp, NOW(), att.value, att.credential_id, att.type
 FROM public.attribute att
 WHERE type = 'business_number' AND NOT EXISTS (SELECT 1 FROM name n WHERE n.type = 'business_number' AND n.credential_id = att.credential_id);
 ```
